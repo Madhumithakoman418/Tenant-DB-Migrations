@@ -242,13 +242,13 @@ async function CreateSuperAdmin(tenantDetails, adminDetails) {
   try {
     const checkpoint = loadCheckpoint();
     const startFrom = checkpoint.currentStep || "STEP_1";
-    const org = "TCS-006";
+    const org = "AVIVO-01";
 
     let step1, step2, step3, step4, step5;
 
     try {
       if (["STEP_1"].includes(startFrom)) {
-        step1 = await runStep("STEP_1", Initialization, org, "Madhumitha", "Koman", "madhumitha@gmail.com", "9987654383");
+        step1 = await runStep("STEP_1", Initialization, org, "seiger", "S", "seiger@gmail.com", "9987654383");
         simulateError("STEP_1");
         await showDecryptedTenantCredentials(step1.ci_org_guid);
       } else {
