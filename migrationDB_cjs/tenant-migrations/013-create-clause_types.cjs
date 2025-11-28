@@ -1,0 +1,16 @@
+exports.up = function (knex) {
+    return knex.schema.createTable("clause_types", (table) => {
+        table.increments("id").primary();         // Integer (PK)
+        table.string("type");                     // Varchar
+        table.enu("source", ["internal", "external"]); // Enum
+        table.integer("org_id").nullable();                 // INT NULL
+        table.timestamp("created_date").defaultTo(knex.fn.now()); // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        table.timestamp("updated_date").defaultTo(knex.fn.now()); // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        table.integer("created_by_user_id");      // Integer
+        table.integer("updated_by_user_id");      // Integer
+    });
+};
+
+exports.down = function (knex) {
+    return knex.schema.dropTable("clause_types");
+};
