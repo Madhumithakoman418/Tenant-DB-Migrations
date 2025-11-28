@@ -250,7 +250,6 @@ async function CreateSuperAdmin(tenantDetails, adminDetails) {
       if (["STEP_1"].includes(startFrom)) {
         step1 = await runStep("STEP_1", Initialization, org, "Madhumitha", "Koman", "madhumitha@gmail.com", "9987654383");
         simulateError("STEP_1");
-        // 👇 Show organization ID right after step 1
         await showDecryptedTenantCredentials(step1.ci_org_guid);
       } else {
         step1 = checkpoint.data?.STEP_1 || checkpoint.data;
