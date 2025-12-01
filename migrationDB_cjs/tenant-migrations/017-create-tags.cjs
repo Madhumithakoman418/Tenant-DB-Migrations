@@ -4,9 +4,8 @@ exports.up = function (knex) {
 
         table.string("name");                     // Varchar
         table.text("description");                // Text
-        table.enu("tag_type", ["system", "custom"]); // Enum
+        table.enu("tag_type", ['template','clause','user_collection']); // Enum
         table.integer("user_id");                 // Integer
-        table.integer("org_id");                            // INT
         table.boolean("is_default");              // Tinyint
     });
 };
