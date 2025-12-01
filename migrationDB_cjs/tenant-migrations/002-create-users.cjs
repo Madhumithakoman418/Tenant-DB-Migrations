@@ -22,7 +22,6 @@ exports.up = function (knex) {
     table.integer("subscription_plan").nullable();         // INT NULL
     table.timestamp("archived_date").nullable();           // TIMESTAMP NULL
     table.integer("changed_by").defaultTo(0);              // INT DEFAULT 0
-    table.integer("org_id").defaultTo(0);                  // INT DEFAULT 0
     table.integer("user_signup_status").nullable();        // INT NULL
     table.string("customer_type").nullable();              // VARCHAR NULL
     
