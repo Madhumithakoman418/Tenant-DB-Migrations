@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { deploymentSteps } from "../mockdata"; // import mock data
+import { deploymentSteps } from "../mockdata"; 
 
 export default function DeploymentStepper() {
   const [activeStep, setActiveStep] = useState(1);
@@ -51,7 +51,6 @@ export default function DeploymentStepper() {
           const isActive = activeStep === step.id;
           const isCompleted = step.status === "completed";
 
-          // ✅ show test button only for steps NOT 1, 4, or 7
           const showTestButton =
             ![1, 4, 7].includes(step.id) && step.hasTestButton !== false;
 
@@ -91,7 +90,7 @@ export default function DeploymentStepper() {
                 </div>
               </div>
 
-              {/* ✅ Only show Test button for allowed steps */}
+              {/*  Only show Test button for allowed steps */}
               {showTestButton && (
                 <button
                   onClick={() => handleTest(step.id)}
