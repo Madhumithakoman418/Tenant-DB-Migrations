@@ -3,7 +3,6 @@ exports.up = function (knex) {
     table.increments("id").primary();                   // INT (PK)
     table.integer("clause_id");                         // INT
     table.integer("user_id");                           // INT
-    table.integer("org_id");                            // INT
     table.text("change_reason");                        // TEXT
     table.text("old_description");                      // TEXT
     table.text("new_description");                      // TEXT
