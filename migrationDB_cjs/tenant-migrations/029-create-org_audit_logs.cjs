@@ -1,7 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable("org_audit_logs", (table) => {
     table.increments("audit_id").primary();       // INT (PK)
-    table.integer("org_id");                      // INT
     table.integer("user_id");                     // INT
     table.string("module");                       // VARCHAR
     table.string("action");                       // VARCHAR
