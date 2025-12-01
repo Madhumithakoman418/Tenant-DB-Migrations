@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Deployment Stepper</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #dcecf4;
+      color: #444;
+    }
+
+    .page-wrapper {
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 40px 40px 80px;
+      background: #e7f2fa;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    /* Top-left back button */
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 25px;
+      background: none;
+      border: none;
+      color: #4a63e7;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      color: #3548c9;
+    }
+
+    .back-btn::before {
+      content: "←";
+      font-size: 18px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: #5b47ce;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #555;
+      font-size: 15px;
+      margin-bottom: 50px;
+    }
+
+    /* Stepper container */
+    .stepper {
+      position: relative;
+      list-style: none;
+      margin: 0;
+      padding: 0 0 0 40px;
+    }
+
+    /* Vertical line */
+    .stepper::before {
+      content: "";
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #cfd8e6;
+    }
+
+    /* Each step */
+    .step {
+      position: relative;
+      padding-bottom: 40px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .step:last-child {
+      padding-bottom: 0;
+    }
+
+    .step-circle {
+      position: absolute;
+      left: 4px;
+      top: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid #cfd8e6;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #7a8699;
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
+
+    .step-content {
+      margin-left: 55px;
+      flex: 1;
+    }
+
+    .step-title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 4px;
+      color: #333;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: #7a8699;
+      line-height: 1.5;
+    }
+
+    /* Active Step */
+    .step.active .step-circle {
+      background: #4a63e7;
+      border-color: #4a63e7;
+      color: #fff;
+    }
+
+    .step.active .step-title {
+      color: #4a63e7;
+    }
+
+    /* Completed Step */
+    .step.completed .step-circle {
+      border-color: #4caf6a;
+      color: #4caf6a;
+    }
+
+    .step.completed .step-circle::before {
+      content: "✓";
+      font-size: 16px;
+    }
+
+    .step.completed .step-circle span {
+      visibility: hidden;
+    }
+
+    .step.completed .step-title {
+      color: #4caf6a;
+    }
+
+    /* Test Button beside specific steps */
+    .test-btn {
+      background: #ffffff;
+      border: 1px solid #4a63e7;
+      color: #4a63e7;
+      padding: 6px 14px;
+      font-size: 13px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+      height: 30px;
+      margin-left: 20px;
+      align-self: center;
+    }
+
+    .test-btn:hover {
+      background: #4a63e7;
+      color: #fff;
+    }
+
+    /* Bottom control buttons */
+    .controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: #4a63e7;
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #3548c9;
+    }
+
+    button:disabled {
+      background: #c5cae9;
+      cursor: not-allowed;
+    }
+
+    .retry-btn {
+      background: #f5f5f5;
+      color: #444;
+      border: 1px solid #ccc;
+    }
+
+    .retry-btn:hover {
+      background: #e0e0e0;
+    }
+
+    .finish-btn {
+      background: #4caf6a;
+    }
+
+    .finish-btn:hover {
+      background: #3f8f5b;
+    }
+
+    .send-btn {
+      background: #4a63e7;
+    }
+
+    .send-btn:hover {
+      background: #3548c9;
+    }
+
+    @media (max-width: 600px) {
+      .page-wrapper {
+        margin: 20px;
+        padding: 25px;
+      }
+
+      .step {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .test-btn {
+        margin: 10px 0 0 55px;
+      }
+
+      .controls {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <button class="back-btn" id="backBtn">Back</button>
+
+    <h1>Deployment Stepper</h1>
+    <p class="subtitle">Environment setup progress</p>
+
+    <ul class="stepper">
+      <li class="step active">
+        <div class="step-circle"><span>1</span></div>
+        <div class="step-content">
+          <div class="step-title">Initialization</div>
+          <div class="step-desc">Kick off the deployment process and load base configuration.</div>
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-circle"><span>2</span></div>
+        <div class="step-content">
+          <div class="step-title">S3 Created</div>
+          <div class="step-desc">S3 bucket successfully created for app assets.</div>
+        </div>
+        <button class="test-btn">Test</button>
+      </li>
+
+      <li class="step">
+        <div class="step-circle"><span>3</span></div>
+        <div class="step-content">
+          <div class="step-title">DB Created</div>
+          <div class="step-desc">Database instance setup complete.</div>
+        </div>
+        <button class="test-btn">Test</button>
+      </li>
+
+      <li class="step">
+        <div class="step-circle"><span>4</span></div>
+        <div class="step-content">
+          <div class="step-title">DB Schema Migration</div>
+          <div class="step-desc">Database schema applied successfully.</div>
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="step-circle"><span>5</span></div>
+        <div class="step-content">
+          <div class="step-title">Cognito Pool Creation</div>
+          <div class="step-desc">Cognito user pool created.</div>
+        </div>
+        <button class="test-btn">Test</button>
+      </li>
+
+      <li class="step">
+        <div class="step-circle"><span>6</span></div>
+        <div class="step-content">
+          <div class="step-title">Primary User Creation</div>
+          <div class="step-desc">Admin user added successfully.</div>
+        </div>
+        <button class="test-btn">Test</button>
+      </li>
+
+      <li class="step">
+        <div class="step-circle"><span>7</span></div>
+        <div class="step-content">
+          <div class="step-title">Final Stage</div>
+          <div class="step-desc">All deployment tasks completed!</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="controls">
+      <button class="retry-btn" id="retryBtn">Retry</button>
+      <button class="send-btn" id="sendBtn">Send Password</button>
+      <button class="finish-btn" id="finishBtn">Finish</button>
+    </div>
+  </div>
+
+  <script>
+    const retryBtn = document.getElementById('retryBtn');
+    const finishBtn = document.getElementById('finishBtn');
+    const sendBtn = document.getElementById('sendBtn');
+    const backBtn = document.getElementById('backBtn');
+    const testButtons = document.querySelectorAll('.test-btn');
+
+    // Send Temporary Password (only alert)
+    sendBtn.addEventListener('click', () => {
+      alert('Temporary password has been sent successfully.');
+    });
+
+    // Retry button
+    retryBtn.addEventListener('click', () => {
+      alert('Retrying deployment process...');
+      location.reload();
+    });
+
+    // Finish button
+    finishBtn.addEventListener('click', () => {
+      alert('Deployment process finished successfully!');
+    });
+
+    // Back button
+    backBtn.addEventListener('click', () => {
+      alert('Going back to previous page...');
+      // You can use window.history.back() in a real app
+    });
+
+    // Test button functionality
+    testButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        btn.textContent = " Tested";
+        btn.style.background = "#4caf6a";
+        btn.style.color = "#fff";
+        btn.style.borderColor = "#4caf6a";
+      });
+    });
+  </script>
+</body>
+</html>
