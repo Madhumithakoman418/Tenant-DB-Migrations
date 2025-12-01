@@ -13,7 +13,7 @@ exports.up = function (knex) {
         table.integer("chat_type");                 // Integer
         table.string("connection_id");              // Varchar
         table.string("ci_file_guid", 100);                    // Varchar(100)
-        table.integer("org_id");                    // Integer
+
     });
 };
 
