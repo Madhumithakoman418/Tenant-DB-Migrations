@@ -7,8 +7,7 @@ exports.up = function (knex) {
     table.integer("avivo_rank").defaultTo(1);           // INT DEFAULT 1
     table.string("risk_level");                         // VARCHAR
     table.integer("clause_type_id");                    // INT
-    table.enu("source", ["internal", "external"]);      // ENUM
-    table.integer("org_id").nullable();                 // INT NULL
+    table.enu("source", ['AVIVO','ORGANIZATION','USER']);      // ENUM
     table.integer("user_id").nullable();                // INT NULL
     table.text("categories").nullable();                // TEXT
     table.timestamp("created_on").defaultTo(knex.fn.now());   // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
