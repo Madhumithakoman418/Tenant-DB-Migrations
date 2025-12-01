@@ -19,14 +19,14 @@ export const deploymentSteps = [
     id: 3,
     title: "DB Created",
     description: "Database instance setup complete.",
-    status: "failed",
+    status: "completed",
     hasTestButton: true,
   },
   {
     id: 4,
     title: "DB Schema Migration",
     description: "Database schema applied successfully.",
-    status: "in_progress",
+    status: "completed",
     hasTestButton: true,
   },
   {
@@ -40,7 +40,7 @@ export const deploymentSteps = [
     id: 6,
     title: "Primary User Creation",
     description: "Admin user added successfully.",
-    status: "pending",
+    status: "completed",
     hasTestButton: true,
   },
   {
