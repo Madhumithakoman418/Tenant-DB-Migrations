@@ -1,5 +1,3 @@
-
-
 export const deploymentSteps = [
   {
     id: 1,
@@ -19,7 +17,7 @@ export const deploymentSteps = [
     id: 3,
     title: "DB Created",
     description: "Database instance setup complete.",
-    status: "completed",
+    status: "pending",
     hasTestButton: true,
   },
   {
@@ -33,14 +31,14 @@ export const deploymentSteps = [
     id: 5,
     title: "Cognito Pool Creation",
     description: "Cognito user pool created.",
-    status: "completed",
+    status: "pending",
     hasTestButton: true,
   },
   {
     id: 6,
     title: "Primary User Creation",
     description: "Admin user added successfully.",
-    status: "completed",
+    status: "pending",
     hasTestButton: true,
   },
   {
