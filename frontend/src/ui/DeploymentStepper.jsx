@@ -26,7 +26,7 @@ export default function DeploymentStepper() {
   };
 
   const handleSend = () => {
-    alert("Temporary password has been sent successfully.");
+    alert("password has been sent successfully.");
   };
 
   const handleFinish = () => {
