@@ -2,7 +2,7 @@ exports.up = function (knex) {
     return knex.schema.createTable("user_roles", (table) => {
         table.increments("role_id").primary();       // Integer (PK)
 
-        table.string("role");                        // Varchar
+        table.string("rolename");                        // Varchar
         table.enu("category", ["ADMIN", "USER", "OWNER", "VIEWER"]); // Enum (example values)
         table.integer("user_id");                    // Integer
         table.timestamp("created_on").defaultTo(knex.fn.now()); // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
