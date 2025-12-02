@@ -12,7 +12,8 @@ exports.up = function (knex) {
     table.timestamp("last_login").nullable();              // TIMESTAMP NULL
     table.timestamp("created_date").defaultTo(knex.fn.now()); // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     table.timestamp("updated_on").defaultTo(knex.fn.now());   // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    table.string("identity_provider");                     // VARCHAR
+    table.string("identity_provider");                    // VARCHAR
+    table.integer("signup_status").nullable();        // INT NULL
     table.integer("is_archived").defaultTo(0);             // INT DEFAULT 0
     table.binary("answer1").nullable();                    // BLOB
     table.binary("answer2").nullable();                    // BLOB
@@ -24,6 +25,7 @@ exports.up = function (knex) {
     table.integer("changed_by").defaultTo(0);              // INT DEFAULT 0
     table.integer("user_signup_status").nullable();        // INT NULL
     table.string("customer_type").nullable();              // VARCHAR NULL
+    table.string("env_type").nullable();              // VARCHAR NULL
     
   });
 };
