@@ -10,7 +10,7 @@ export const deploymentSteps = [
     id: 2,
     title: "S3 Created",
     description: "S3 bucket successfully created for app assets.",
-    status: "completed",
+    status: "failed",
     hasTestButton: true,
   },
   {
@@ -24,7 +24,7 @@ export const deploymentSteps = [
     id: 4,
     title: "DB Schema Migration",
     description: "Database schema applied successfully.",
-    status: "completed",
+    status: "pending",
     hasTestButton: true,
   },
   {
