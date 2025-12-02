@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { deploymentSteps } from "../mockdata"; 
+import { deploymentSteps } from "../mockdata";
 
 export default function DeploymentStepper() {
   const [activeStep, setActiveStep] = useState(1);
@@ -50,6 +50,7 @@ export default function DeploymentStepper() {
         {deploymentSteps.map((step) => {
           const isActive = activeStep === step.id;
           const isCompleted = step.status === "completed";
+          const isFailed = step.status === "failed";
 
           const showTestButton =
             ![1, 4, 7].includes(step.id) && step.hasTestButton !== false;
@@ -59,24 +60,29 @@ export default function DeploymentStepper() {
               key={step.id}
               className="relative pb-10 flex flex-col sm:flex-row sm:items-start sm:justify-between last:pb-0"
             >
-              {/* Step Number / Checkmark */}
+              {/* Step Number / Status Icon */}
               <div
-                className={`absolute left-0 top-0 w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold text-sm transition-all z-10 ${
-                  isCompleted
-                    ? "border-green-500 text-green-500 bg-white"
-                    : isActive
-                    ? "bg-indigo-600 border-indigo-600 text-white"
-                    : "border-gray-300 text-gray-400 bg-white"
-                }`}
+                className={`absolute left-0 top-0 w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold text-sm transition-all z-10
+                  ${
+                    isFailed
+                      ? "border-red-500 text-red-500 bg-white"
+                      : isCompleted
+                      ? "border-green-500 text-green-500 bg-white"
+                      : isActive
+                      ? "bg-indigo-600 border-indigo-600 text-white"
+                      : "border-gray-300 text-gray-400 bg-white"
+                  }`}
               >
-                {isCompleted ? "✓" : step.id}
+                {isCompleted ? "✓" : isFailed ? "✕" : step.id}
               </div>
 
               {/* Step Details */}
               <div className="ml-12 flex-1">
                 <div
                   className={`font-semibold text-base ${
-                    isCompleted
+                    isFailed
+                      ? "text-red-600"
+                      : isCompleted
                       ? "text-green-600"
                       : isActive
                       ? "text-indigo-600"
@@ -90,7 +96,7 @@ export default function DeploymentStepper() {
                 </div>
               </div>
 
-              {/*  Only show Test button for allowed steps */}
+              {/* Only show Test button for allowed steps */}
               {showTestButton && (
                 <button
                   onClick={() => handleTest(step.id)}
