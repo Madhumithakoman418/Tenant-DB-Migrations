@@ -6,8 +6,8 @@ exports.up = function (knex) {
         table.json("ci_file_guid_arr");             // JSON
         table.json("tag_ids_arr");                  // JSON
         table.integer("parent_session_id");         // Integer
-        table.timestamp("created_at");                        // Timestamp
-        table.timestamp("updated_at");   
+        table.timestamp("created_date");                        // Timestamp
+        table.timestamp("updated_date");   
         table.bigInteger("archived_by").nullable();           // BIGINT NULL 
         table.binary("title");                      // Blob
         table.integer("chat_type");                 // Integer
