@@ -1,7 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable("alerts", (table) => {
     table.bigIncrements("alert_id").primary();           // BIGINT (PK)
-    table.string("cl_org_guid");                         // VARCHAR
+    table.string("ci_org_guid");                         // VARCHAR
     table.bigInteger("alert_type_id");                   // BIGINT
     table.text("alert_message");                         // TEXT
     table.timestamp("raised_on").defaultTo(knex.fn.now()); // TIMESTAMP DEFAULT now()
