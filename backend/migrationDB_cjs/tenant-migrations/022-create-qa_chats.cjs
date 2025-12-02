@@ -14,6 +14,7 @@ exports.up = function (knex) {
     table.bigInteger("file_id").nullable();            // BIGINT NULL
     table.string("file_name").nullable();              // VARCHAR NULL
     table.string("connection_id").nullable();          // VARCHAR NULL
+    table.string("request_id").nullable();                // VARCHAR NULL
     
   });
 };
