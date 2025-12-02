@@ -3,8 +3,6 @@ exports.up = function (knex) {
     table.increments("link_id").primary();       // PK (INT AUTO_INCREMENT)
 
     table.integer("user_id").unsigned().notNullable();   // FK → users.user_id
-    table.integer("org_id").unsigned().notNullable();    // FK → orgs.org_id  
-
     table.integer("user_role").nullable();       // INT
     table.integer("link_state").nullable();      // INT
     table.integer("added_by").nullable();        // INT
