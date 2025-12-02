@@ -3,8 +3,8 @@ exports.up = function (knex) {
         table.increments("id").primary();         // Integer (PK)
         table.string("type");                     // Varchar
         table.enu("source", ['AVIVO','ORGANIZATION','USER']); // Enum
-        table.timestamp("created_date").defaultTo(knex.fn.now()); // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        table.timestamp("updated_date").defaultTo(knex.fn.now()); // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        table.timestamp("created_at").defaultTo(knex.fn.now()); // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        table.timestamp("updated_at").defaultTo(knex.fn.now()); // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         table.integer("created_by_user_id");      // Integer
         table.integer("updated_by_user_id");      // Integer
     });
