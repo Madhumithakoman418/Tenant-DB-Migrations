@@ -14,7 +14,7 @@ exports.up = function (knex) {
     table.timestamp("updated_on").defaultTo(knex.fn.now());   // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     table.string("identity_provider");                    // VARCHAR
     table.integer("signup_status").nullable();        // INT NULL
-    table.integer("is_archived").defaultTo(0);             // INT DEFAULT 0
+    table.integer("is_archived").nullable();             // INT null
     table.binary("answer1").nullable();                    // BLOB
     table.binary("answer2").nullable();                    // BLOB
     table.binary("answer3").nullable();                    // BLOB
