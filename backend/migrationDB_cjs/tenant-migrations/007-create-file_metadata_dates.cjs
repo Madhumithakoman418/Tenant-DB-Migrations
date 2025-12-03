@@ -3,8 +3,8 @@ exports.up = function (knex) {
         table.bigIncrements("data_id").primary();      // Bigint (PK)
 
         table.string("ci_file_guid");                  // Varchar
-        table.string("date_title");                    // Varchar
-        table.dateTime("date_value");                  // Datetime
+        table.string("date_title").nullable();                    // Varchar Default NULL
+        table.dateTime("date_value").nullable;                  // Datetime Default NULL
         table.timestamp("updated_on").defaultTo(knex.fn.now()); // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     });
 };
