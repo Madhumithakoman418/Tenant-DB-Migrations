@@ -4,7 +4,7 @@ exports.up = function (knex) {
 
         table.string("rolename");                        // Varchar
         table.enu("category", ["ADMIN", "USER", "OWNER", "VIEWER"]); // Enum (example values)
-        table.integer("user_id");                    // Integer
+        table.integer("user_id").nullable().defaultTo(null); // default null
         table.timestamp("created_on").defaultTo(knex.fn.now()); // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         table.timestamp("updated_on").defaultTo(knex.fn.now()); // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     });
