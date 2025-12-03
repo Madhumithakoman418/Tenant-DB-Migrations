@@ -1,8 +1,8 @@
 exports.up = function (knex) {
   return knex.schema.createTable("clause_edit_history", (table) => {
     table.increments("id").primary();                   // INT (PK)
-    table.integer("clause_id");                         // INT
-    table.integer("user_id");                           // INT
+    table.integer("clause_id").notNullable();                         // INT
+    table.integer("user_id").notNullable();                           // INT
     table.text("change_reason");                        // TEXT
     table.text("old_description");                      // TEXT
     table.text("new_description");                      // TEXT
