@@ -5,8 +5,8 @@ exports.up = function (knex) {
         table.string("connection_id").notNullable();              // Varchar
         table.timestamp("created_at").defaultTo(knex.fn.now());  // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         table.timestamp("updated_at").defaultTo(knex.fn.now());  // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        table.string("user_id").Nullable();                    // Varchar
-        table.string("client_ip").Nullable();                  // Varchar
+        table.string("user_id").nullable();                    // Varchar
+        table.string("client_ip").nullable();                  // Varchar
     });
 };
 
